@@ -1,0 +1,1 @@
+Simple Dictionary as a demo used at [CodeGym](http://codegym.vn).
