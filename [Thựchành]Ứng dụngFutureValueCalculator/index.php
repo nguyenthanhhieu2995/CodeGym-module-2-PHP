@@ -12,7 +12,7 @@
         <h1>Future Value Calculator</h1>
         <p class="error">Investment is a required field</p>
 
-        <form action="" method="POST">
+        <form action="index2.php" method="POST">
             <div id="data">
                 <label>Investment Amount:</label>
                 <input type="text" name="investment" value="0" /><br />
@@ -29,18 +29,7 @@
             </div>
         </form>
     </div>
-    <?php
-    if ($_SERVER["REQUEST_METHOD"] == "POST") {
-        var_dump($_POST);
-        $investment = $_POST["investment"];
-        $rate = $_POST["rate"] / 100;
-        $year = $_POST["years"];
-        for ($i = 0; $i < $year; $i++) {
-            $investment = $investment + ($investment * $rate);
-        }
-        echo $investment;
-    }
-    ?>
+
 </body>
 
 </html>
