@@ -36,14 +36,14 @@
         $select_Operator = $_POST["operator"];
         $second_Operand = $_POST["second_operand"];
         $result = 0;
-        if ($select_Operator = "addition") {
+        if ($select_Operator == "addition") {
             $result = $first_Operand + $second_Operand;
-        } else if ($select_Operator = "subtraction") {
+        } else if ($select_Operator == "subtraction") {
             $result = $first_Operand - $second_Operand;
-        } else if ($select_Operator = "multiple") {
+        } else if ($select_Operator =="multiple") {
             $result = $first_Operand * $second_Operand;
         } else {
-            if ($second_Operand == "0") {
+            if ($second_Operand == 0) {
                 $result = "Error";
             } else {
                 $result = $first_Operand / $second_Operand;
