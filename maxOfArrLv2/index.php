@@ -30,8 +30,8 @@
             foreach ($array as $col => $value)
                 if ($max < $value) {
                     $max = $value;
-                    $rowOfMax = $row;
-                    $colOfMax = $col;
+                    $rowOfMax = $row + 1;
+                    $colOfMax = $col + 1;
                 };
         }
         $result = array($max, $rowOfMax, $colOfMax);
