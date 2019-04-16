@@ -1,4 +1,3 @@
-<?php session_start(); ?>
 <!DOCTYPE html>
 <html lang="en">
 
@@ -6,39 +5,54 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <meta http-equiv="X-UA-Compatible" content="ie=edge">
-    <title>Find min value of array</title>
+    <title>max of array lv2</title>
 </head>
 
 <body>
-    <form action="<?php echo htmlspecialchars($_SERVER["PHP_SELF"]); ?>" method="POST">
-        <label for="size"></label>
-        <input id="size" name="size" value="<?php if (isset($_POST["size"])) {
-                                                echo $_POST["size"];
-                                            } ?>" type="number" style="width:100px">
-        <input type="submit" value="Size of Array">
-    </form>
-
     <?php
-
-    if (isset($_POST["size"])) {
-        $_SESSION["size"]  = $_POST["size"];
-        $size = $_SESSION["size"];
-        echo "</br><form method='POST'>";
-        for ($i = 0; $i < $size; $i++) {
-            echo "<input name='element(" . $i . ")' type='number' style='width:50px;'>";
-        };
-        echo "</br></br><input name='find' type='submit' value='Find min'></form>";
+    $rowOfArray = $colOfArray = "";
+    if ($_SERVER["REQUEST_METHOD"] == "POST") {
+        $rowOfArray = $_POST["row"];
+        $colOfArray = $_POST["col"];
     }
-    if (isset($_POST["find"])) {
-        $size = $_SESSION["size"];
-        $array = array();
-        for ($i = 0; $i < $size; $i++) {
-            array_push($array, $_POST["element($i)"]);
+    ?>
+    <form method="POST" action="<?php echo htmlspecialchars($_SERVER['PHP_SELF']); ?>">
+        <input type="number" placeholder="row of array" value="<?php echo $rowOfArray ?>" name="row" style='width:100px;'>
+        <input type="number" placeholder="col of array" value="<?php echo $colOfArray ?>" name="col" style='width:100px;'>
+        <input type="submit" value="Size of array">
+    </form>
+    <?php
+    function maxOfArray($matrix)
+    {
+        $max = $matrix[0][0];
+        $rowOfMax = $colOfMax = 0;
+        foreach ($matrix as $row => $array) {
+            foreach ($array as $col => $value)
+                if ($max < $value) {
+                    $max = $value;
+                    $rowOfMax = $row + 1;
+                    $colOfMax = $col + 1;
+                };
         }
-        echo "<pre>";
-        print_r($array);
-        echo "</pre>";
-        echo "<b> Min value of array :" . min($array) . "</b>";
+        $result = array($max, $rowOfMax, $colOfMax);
+        return $result;
+    };
+    ?>
+    <?php
+    if ($_SERVER["REQUEST_METHOD"] == "POST") {
+        $matrix = array('row' => array(), 'col' => array());
+        echo "<table><tbody>";
+        for ($row = 0; $row < $rowOfArray; $row++) {
+            echo "<tr>";
+            for ($col = 0; $col < $colOfArray; $col++) {
+                $matrix[$row][$col] = mt_rand(0, 100);
+                echo "<td style='width:50px;'>" . $matrix[$row][$col] . "</td>";
+            }
+            echo "</tr>";
+        }
+        echo "</tbody></table>";
+        $result = maxOfArray($matrix);
+        echo "<br/>Giá trị lớn nhất: $result[0] tại hàng $result[1] cột $result[2]";
     }
     ?>
 </body>
