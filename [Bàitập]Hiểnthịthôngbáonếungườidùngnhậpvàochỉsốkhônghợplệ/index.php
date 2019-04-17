@@ -23,13 +23,20 @@
         $_SESSION["result"] .= "</div>";
         echo $_SESSION["result"];
         echo "</br><span>Index of array</span><form method='POST'>
-        <input name='index' type='number' min='0' max='99' style='width:50px'>
+        <input name='index' type='number' style='width:50px'>
         </br><input type='submit' value='Find value'>";
     }
     if (isset($_POST["index"])) {
         $indexOfArray = $_POST["index"];
-        echo $_SESSION["result"];
-        echo "<br> Giá trị của mảng ở vị trí $indexOfArray là: <b>" . $_SESSION["size"][$indexOfArray] . "</b>";
+        try {
+            echo $_SESSION["result"];
+            if ($indexOfArray < 0 || $indexOfArray >= 100) {
+                throw new Exception("Chỉ số vượt quá giới hạn của mảng");
+            }
+            echo "<br> Giá trị của mảng ở vị trí $indexOfArray là: <b>" . $_SESSION["size"][$indexOfArray] . "</b>";
+        } catch (Exception $e) {
+            echo "<br>Message: " . $e->getMessage();
+        }
     }
 
     ?>
