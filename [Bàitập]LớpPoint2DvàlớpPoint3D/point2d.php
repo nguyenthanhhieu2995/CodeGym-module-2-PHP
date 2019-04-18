@@ -38,3 +38,4 @@ class Point2D
         return "($this->x,$this->y)";
     }
 }
+?>
